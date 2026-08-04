@@ -37,8 +37,14 @@ Reemplaza los archivos en `assets/videos/` conservando los mismos nombres.
 
 ### Datos de contacto
 
-El WhatsApp y el correo aparecen en la sección de contacto y en el pie de página.
-Busca `wa.me` y `contacto@meduzza.co` para actualizarlos.
+Aparecen en la sección de contacto y en el pie de página:
+
+- **WhatsApp:** 313 841 3374 — busca `wa.me` (el número va sin espacios y con
+  el prefijo del país: `573138413374`)
+- **Instagram:** [@meduzza.prod](https://instagram.com/meduzza.prod) — busca `instagram.com`
+
+El botón de WhatsApp abre el chat con un mensaje ya escrito pidiendo fecha,
+lugar y número de personas. Ese texto va en el parámetro `?text=` del enlace.
 
 ## Publicar cambios
 

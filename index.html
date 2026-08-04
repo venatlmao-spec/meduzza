@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MEDUZZA — Producción de Eventos, Sonido y Luces · Bogotá</title>
-<meta name="description" content="MEDUZZA produce eventos, fiestas y conciertos en Bogotá: sonido profesional, iluminación, pantallas LED, efectos especiales y tarimas. La experiencia en vivo, hecha por quienes viven de esto.">
+<meta name="description" content="MEDUZZA produce eventos, fiestas y conciertos en Bogotá: sonido profesional, iluminación, efectos especiales y tarimas. La experiencia en vivo, hecha por quienes viven de esto.">
 <meta property="og:title" content="MEDUZZA — Producción de Eventos, Sonido y Luces">
-<meta property="og:description" content="Sonido, luces, pantallas LED y efectos en vivo para eventos y fiestas en Bogotá.">
+<meta property="og:description" content="Sonido, luces y efectos especiales en vivo para eventos y fiestas en Bogotá.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://meduzza.store/">
 <meta property="og:image" content="https://meduzza.store/assets/event-02.jpg">
@@ -149,7 +149,59 @@
     transition: background 150ms ease, color 150ms ease;
   }
   .nav-cta:hover, .nav-cta:focus-visible{ background: transparent; color: var(--paper); }
-  .nav-toggle{ display: none; }
+  .nav-right{ display: flex; align-items: center; gap: 12px; }
+
+  /* boton hamburguesa: solo aparece cuando se oculta el menu de escritorio */
+  .nav-toggle{
+    display: none;
+    width: 46px; height: 46px; padding: 0;
+    background: transparent; border: 2px solid var(--line);
+    cursor: pointer;
+    flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    transition: border-color 150ms ease;
+  }
+  .nav-toggle:hover{ border-color: var(--magenta); }
+  .nav-toggle span{
+    display: block; width: 20px; height: 2px; background: var(--paper);
+    transition: transform 250ms ease, opacity 180ms ease;
+  }
+  body.menu-open .nav-toggle{ border-color: var(--magenta); }
+  body.menu-open .nav-toggle span:nth-child(1){ transform: translateY(7px) rotate(45deg); }
+  body.menu-open .nav-toggle span:nth-child(2){ opacity: 0; }
+  body.menu-open .nav-toggle span:nth-child(3){ transform: translateY(-7px) rotate(-45deg); }
+
+  /* panel de navegacion a pantalla completa en movil */
+  .mobile-menu{
+    position: fixed; inset: 0; z-index: 95;
+    background: rgba(5,4,3,0.97);
+    backdrop-filter: blur(10px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 4px;
+    opacity: 0; visibility: hidden;
+    transition: opacity 300ms ease, visibility 300ms ease;
+  }
+  body.menu-open .mobile-menu{ opacity: 1; visibility: visible; }
+  body.menu-open{ overflow: hidden; }
+  .mobile-menu a{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 9vw, 2.8rem);
+    text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--paper); text-decoration: none;
+    padding: 12px 24px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 400ms ease, transform 400ms ease, color 150ms ease;
+  }
+  body.menu-open .mobile-menu a{ opacity: 1; transform: none; }
+  .mobile-menu a:nth-child(2){ transition-delay: 60ms; }
+  .mobile-menu a:nth-child(3){ transition-delay: 120ms; }
+  .mobile-menu a:nth-child(4){ transition-delay: 180ms; }
+  .mobile-menu a:nth-child(5){ transition-delay: 240ms; }
+  .mobile-menu a:active, .mobile-menu a:hover, .mobile-menu a:focus-visible{ color: var(--magenta); }
+  .mobile-menu .mm-wa{
+    margin-top: 18px; font-size: 1.5rem;
+    border: 2px solid var(--magenta); color: var(--magenta);
+    padding: 12px 34px;
+  }
 
   /* ================= HERO ================= */
   .hero{
@@ -311,11 +363,12 @@
   .s-media::after{
     content: ""; position: absolute; inset: 0; mix-blend-mode: color;
   }
-  .service-row:nth-child(1) .s-media::after{ background: var(--blue); opacity: 0.55; }
-  .service-row:nth-child(2) .s-media::after{ background: var(--magenta); opacity: 0.5; }
-  .service-row:nth-child(3) .s-media::after{ background: var(--cyan); opacity: 0.45; }
-  .service-row:nth-child(4) .s-media::after{ background: var(--amber); opacity: 0.4; }
-  .service-row:nth-child(5) .s-media::after{ background: var(--red); opacity: 0.45; }
+  /* el tinte va por clase y no por posicion: asi no se descuadra al anadir o quitar servicios */
+  .service-row.tint-magenta .s-media::after{ background: var(--magenta); opacity: 0.5; }
+  .service-row.tint-cyan    .s-media::after{ background: var(--cyan);    opacity: 0.45; }
+  .service-row.tint-amber   .s-media::after{ background: var(--amber);   opacity: 0.4; }
+  .service-row.tint-red     .s-media::after{ background: var(--red);     opacity: 0.45; }
+  .service-row.tint-blue    .s-media::after{ background: var(--blue);    opacity: 0.55; }
   .s-text{
     display: flex; flex-direction: column; justify-content: center;
     padding: 60px; gap: 14px;
@@ -432,7 +485,13 @@
   .video-card:hover{ border-color: var(--magenta); transform: translateY(-4px); }
   .video-card video{
     width: 100%; aspect-ratio: 16/9; display: block;
-    background: #000; object-fit: cover;
+    background: #000;
+    /* contain y no cover: hay videos grabados en vertical y con cover se recortaban */
+    object-fit: contain;
+  }
+  /* a los verticales se les da su propia proporcion cuando la tarjeta ocupa todo el ancho */
+  @media (max-width: 980px){
+    .video-card.is-portrait video{ aspect-ratio: 9/16; max-height: 70vh; }
   }
   .video-card figcaption{
     padding: 14px 16px;
@@ -525,21 +584,80 @@
   }
 
   /* ================= RESPONSIVE ================= */
+  /* ================= TABLET ================= */
   @media (max-width: 980px){
     .nav-links{ display: none; }
+    .nav-toggle{ display: flex; }
     .service-row, .service-row.rev{ grid-template-columns: 1fr; }
     .service-row .s-media, .service-row.rev .s-media{ order: 1; min-height: 280px; }
-    .service-row .s-text, .service-row.rev .s-text{ order: 2; padding: 40px 8px; }
+    /* el texto va a ras de pantalla, asi que necesita el mismo margen que .container */
+    .service-row .s-text, .service-row.rev .s-text{ order: 2; padding: 40px 28px; }
     .ticket-row{ grid-template-columns: repeat(2, 1fr); gap: 28px; }
     .footer-grid{ grid-template-columns: 1fr; gap: 34px; }
-    .video-grid{ grid-template-columns: 1fr; }
+    .video-grid{ grid-template-columns: 1fr; max-width: 620px; margin-left: auto; margin-right: auto; }
   }
-  @media (max-width: 560px){
-    .hero-top{ padding: 100px 0 20px; }
+
+  /* ================= MÓVIL ================= */
+  @media (max-width: 640px){
     .container{ padding: 0 18px; }
-    .s-text{ padding: 34px 4px; }
-    .ticket-row{ grid-template-columns: 1fr; }
-    .quote{ width: 300px; }
+
+    /* secciones mas compactas: 130px de aire arriba y abajo es demasiado en pantalla pequena */
+    .services{ padding: 76px 0 40px; }
+    .packages, .live, .process{ padding: 76px 0; }
+    .testimonials{ padding: 64px 0 76px; }
+    .cta{ padding: 90px 0; }
+    footer{ padding: 56px 0 24px; }
+
+    /* cabecera: el logo solo, para dejar sitio al CTA y al menu */
+    .brand span{ display: none; }
+    .brand img{ height: 36px; }
+    .nav-cta{ padding: 10px 16px; font-size: 0.88rem; }
+    .nav-right{ gap: 8px; }
+
+    /* hero */
+    .hero-top{ padding: 96px 0 18px; gap: 20px; }
+    .hero-tag{ font-size: 0.72rem; letter-spacing: 0.2em; padding: 7px 14px; }
+    .hero-main h1{ font-size: clamp(2.6rem, 13vw, 3.6rem); }
+    .hero-sub{ font-size: 1.02rem; margin-top: 20px; }
+    .hero-actions{ margin-top: 26px; gap: 12px; width: 100%; }
+    .hero-actions .btn{ flex: 1 1 100%; justify-content: center; }
+
+    /* servicios alineados con el resto de la pagina */
+    .service-row .s-text, .service-row.rev .s-text{ padding: 32px 18px 38px; }
+    .s-media{ min-height: 230px; }
+    .sec-title{ font-size: clamp(1.9rem, 8vw, 2.6rem); }
+
+    /* paquetes: sin inclinacion, que en una sola columna se ve descuadrado */
+    .ticket-row{ grid-template-columns: 1fr; gap: 22px; }
+    .ticket, .ticket-row.in .ticket:nth-child(1), .ticket-row.in .ticket:nth-child(2),
+    .ticket-row.in .ticket:nth-child(3), .ticket-row.in .ticket:nth-child(4){ transform: none; }
+    .ticket{ padding: 34px 22px 28px; }
+    .ticket h3{ font-size: 2.1rem; }
+    .ticket-price b{ font-size: 1.8rem; }
+
+    /* linea de tiempo: menos sangria para ganar ancho de lectura */
+    .timeline{ padding-left: 22px; }
+    .tl-step{ padding: 0 0 44px 0; }
+    .tl-step::before{ left: -31px; width: 14px; height: 14px; }
+    .tl-step h3{ font-size: 1.6rem; }
+
+    /* testimonios */
+    .t-head{ align-items: flex-start; }
+    .t-slider{ margin-top: 34px; gap: 16px; }
+    .quote{ flex-basis: 86vw; padding: 26px 22px; }
+    .quote p{ font-size: 1rem; }
+    .t-btn{ width: 48px; height: 48px; }
+
+    /* marquesina y CTA */
+    .marquee-track span{ font-size: 1.1rem; padding: 12px 18px; }
+    .cta-actions{ width: 100%; }
+    .cta-actions .btn{ flex: 1 1 100%; justify-content: center; }
+    .cta-logo{ height: auto; width: 118%; max-width: none; }
+
+    /* rendimiento: mezclar una capa fija y desenfocar el fondo en cada scroll
+       cuesta caro en movil, asi que se cambian por equivalentes planos */
+    .grain{ mix-blend-mode: normal; opacity: 0.035; }
+    header.solid{ backdrop-filter: none; background: var(--black); }
   }
 </style>
 </head>
@@ -560,9 +678,22 @@
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </nav>
-    <a href="#contacto" class="nav-cta">Cotizar</a>
+    <div class="nav-right">
+      <a href="#contacto" class="nav-cta">Cotizar</a>
+      <button class="nav-toggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
+
+<nav class="mobile-menu" id="mobileMenu" aria-label="Menú móvil">
+  <a href="#servicios">Servicios</a>
+  <a href="#paquetes">Paquetes</a>
+  <a href="#envivo">En vivo</a>
+  <a href="#contacto">Contacto</a>
+  <a class="mm-wa" href="https://wa.me/573138413374?text=Hola%20Meduzza%2C%20quiero%20cotizar%20un%20evento.%0AFecha%3A%0ALugar%3A%0APersonas%3A">WhatsApp</a>
+</nav>
 
 <main id="top">
 
@@ -582,7 +713,7 @@
         <span class="hl-magenta">RUMBA,</span> <span class="hl-cyan">SHOW</span><br>
         Y EXPERIENCIA
       </h1>
-      <p class="hero-sub">Producción integral de eventos en vivo: sonido, luces, pantallas LED, efectos especiales y tarimas. Diseñamos el momento, ustedes viven la fiesta.</p>
+      <p class="hero-sub">Producción integral de eventos en vivo: sonido, luces, efectos especiales y tarimas. Diseñamos el momento, ustedes viven la fiesta.</p>
       <div class="hero-actions">
         <a href="#paquetes" class="btn btn-solid">Ver paquetes</a>
         <a href="#contacto" class="btn btn-line">Cotizar mi evento</a>
@@ -590,7 +721,7 @@
     </div>
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span class="hot">Sonido profesional</span><span>Iluminación robótica</span><span class="hot">Pantallas LED</span><span>Efectos especiales</span><span class="hot">Tarimas y estructuras</span><span>DJs en vivo</span><span class="hot">Sonido profesional</span><span>Iluminación robótica</span><span class="hot">Pantallas LED</span><span>Efectos especiales</span><span class="hot">Tarimas y estructuras</span><span>DJs en vivo</span>
+        <span class="hot">Sonido profesional</span><span>Iluminación robótica</span><span class="hot">Cámara de humo</span><span>Efectos especiales</span><span class="hot">Tarimas y estructuras</span><span>DJs en vivo</span><span class="hot">Sonido profesional</span><span>Iluminación robótica</span><span class="hot">Cámara de humo</span><span>Efectos especiales</span><span class="hot">Tarimas y estructuras</span><span>DJs en vivo</span>
       </div>
     </div>
   </section>
@@ -602,7 +733,7 @@
       <h2 class="sec-title display">Cada evento tiene su propio universo técnico</h2>
     </div>
 
-    <div class="service-row reveal r-left">
+    <div class="service-row tint-magenta reveal r-left">
       <div class="s-media"><img src="assets/event-02.jpg" alt="DJ en consola durante un evento con humo y luces"></div>
       <div class="s-text cascade">
         <span class="s-num">01</span>
@@ -611,37 +742,28 @@
       </div>
     </div>
 
-    <div class="service-row rev reveal r-right">
+    <div class="service-row tint-cyan rev reveal r-right">
       <div class="s-media"><img src="assets/event-05.jpg" alt="Estructura de truss con láseres en un evento"></div>
       <div class="s-text cascade">
         <span class="s-num">02</span>
         <h3 class="display">Iluminación &amp; láseres</h3>
-        <p>Cabezas robóticas, láser, LED wash y diseño de iluminación que sigue el ritmo de la noche, de la bienvenida al cierre.</p>
+        <p>Cabezas robóticas, láser con DMX, luces strober y diseño de iluminación que sigue el ritmo de la noche, de la bienvenida al cierre.</p>
       </div>
     </div>
 
-    <div class="service-row reveal r-left">
-      <div class="s-media"><img src="assets/event-07.jpg" alt="Pantalla LED y equipo en un montaje de evento"></div>
-      <div class="s-text cascade">
-        <span class="s-num">03</span>
-        <h3 class="display">Pantallas LED &amp; visuales</h3>
-        <p>Video walls, proyección y contenido en vivo para conciertos, activaciones de marca y presentaciones corporativas de alto impacto.</p>
-      </div>
-    </div>
-
-    <div class="service-row rev reveal r-right">
+    <div class="service-row tint-amber reveal r-left">
       <div class="s-media"><img src="assets/event-09.jpg" alt="Efectos especiales y ambientación de un evento nocturno"></div>
       <div class="s-text cascade">
-        <span class="s-num">04</span>
+        <span class="s-num">03</span>
         <h3 class="display">Efectos especiales</h3>
         <p>Humo, CO2, chispas frías y pirotecnia fría que marcan los momentos clave del evento sin arriesgar la seguridad del público.</p>
       </div>
     </div>
 
-    <div class="service-row reveal r-left">
+    <div class="service-row tint-red rev reveal r-right">
       <div class="s-media"><img src="assets/event-06.jpg" alt="Tarima y estructura de montaje para un evento"></div>
       <div class="s-text cascade">
-        <span class="s-num">05</span>
+        <span class="s-num">04</span>
         <h3 class="display">Tarimas &amp; estructuras</h3>
         <p>Montaje de tarimas, truss y estructuras certificadas para conciertos, festivales y eventos corporativos en toda Bogotá.</p>
       </div>
@@ -867,7 +989,7 @@
     <div class="footer-grid">
       <div>
         <a href="#top" class="footer-brand"><img src="assets/logo.png" alt="Meduzza"><span class="display">MEDUZZA</span></a>
-        <p>Producción de eventos, sonido, luces, pantallas LED y efectos especiales para fiestas, conciertos y corporativos en toda Bogotá.</p>
+        <p>Producción de eventos, sonido, luces y efectos especiales para fiestas, conciertos y corporativos en toda Bogotá.</p>
       </div>
       <div>
         <h4>Navegación</h4>
@@ -894,16 +1016,52 @@
 </footer>
 
 <script>
-  // header solidifies on scroll
   const header = document.getElementById('siteHeader');
   const heroBg = document.getElementById('heroBg');
-  function onScroll(){
+  // el parallax se desactiva en pantallas tactiles: mover el fondo en cada scroll
+  // provoca tirones, y en moviles la barra del navegador ya desplaza el hero al aparecer
+  const bigScreen = window.matchMedia('(min-width: 981px)');
+
+  let ticking = false;
+  function applyScroll(){
     const y = window.scrollY;
     header.classList.toggle('solid', y > 40);
-    if (heroBg) heroBg.style.transform = 'translateY(' + Math.min(y * 0.18, 120) + 'px)';
+    if (heroBg && bigScreen.matches) {
+      heroBg.style.transform = 'translateY(' + Math.min(y * 0.18, 120) + 'px)';
+    }
+    ticking = false;
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  // se pinta una sola vez por frame en vez de en cada evento de scroll
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(applyScroll); }
+  }, { passive: true });
+  bigScreen.addEventListener('change', (e) => { if (!e.matches && heroBg) heroBg.style.transform = ''; });
+  applyScroll();
+
+  // menu movil
+  const toggle = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    const setMenu = (open) => {
+      document.body.classList.toggle('menu-open', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    };
+    toggle.addEventListener('click', () => setMenu(!document.body.classList.contains('menu-open')));
+    // al tocar un enlace se cierra para que se vea el destino
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setMenu(false); });
+    // si se agranda la ventana y vuelve el menu de escritorio, se cierra el panel
+    bigScreen.addEventListener('change', (e) => { if (e.matches) setMenu(false); });
+  }
+
+  // marca los videos verticales para que no se recorten
+  document.querySelectorAll('.video-card video').forEach(v => {
+    const mark = () => {
+      if (v.videoHeight > v.videoWidth) v.closest('.video-card').classList.add('is-portrait');
+    };
+    if (v.readyState >= 1) mark(); else v.addEventListener('loadedmetadata', mark, { once: true });
+  });
 
   // scroll reveal
   const io = new IntersectionObserver((entries) => {
@@ -916,15 +1074,24 @@
   if (slider) {
     const step = () => {
       const card = slider.querySelector('.quote');
-      return card ? card.getBoundingClientRect().width + 26 : 440;
+      if (!card) return slider.clientWidth;
+      const gap = parseFloat(getComputedStyle(slider).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
     };
     document.querySelector('.t-prev').addEventListener('click', () => slider.scrollBy({ left: -step(), behavior: 'smooth' }));
     document.querySelector('.t-next').addEventListener('click', () => slider.scrollBy({ left: step(), behavior: 'smooth' }));
-    // arrastre con el mouse en desktop
+
+    // arrastre solo con mouse: en tactil estorbaria al desplazamiento nativo,
+    // que ya trae inercia y ajuste a cada tarjeta
     let down = false, startX = 0, startScroll = 0;
-    slider.addEventListener('pointerdown', (e) => { down = true; startX = e.clientX; startScroll = slider.scrollLeft; });
+    slider.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      down = true; startX = e.clientX; startScroll = slider.scrollLeft;
+    });
     window.addEventListener('pointerup', () => { down = false; });
-    slider.addEventListener('pointermove', (e) => { if (down) slider.scrollLeft = startScroll - (e.clientX - startX); });
+    slider.addEventListener('pointermove', (e) => {
+      if (down && e.pointerType === 'mouse') slider.scrollLeft = startScroll - (e.clientX - startX);
+    });
   }
 </script>
 

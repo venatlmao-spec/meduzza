@@ -1,7 +1,7 @@
 # MEDUZZA
 
 Sitio web de **Meduzza** — producción de eventos, sonido profesional, iluminación,
-pantallas LED, efectos especiales y tarimas en Bogotá.
+efectos especiales y tarimas en Bogotá.
 
 🌐 **meduzza.store**
 

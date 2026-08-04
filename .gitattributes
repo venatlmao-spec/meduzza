@@ -1,0 +1,2 @@
+# GitHub Pages lee CNAME literalmente: debe ir con saltos de línea LF
+CNAME text eol=lf

@@ -37,7 +37,7 @@
     "name": "Bogotá"
   },
   "sameAs": ["https://www.instagram.com/meduzza.prod"],
-  "priceRange": "COP 450.000 - 1.000.000"
+  "priceRange": "COP 300.000 - 1.000.000"
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -430,11 +430,13 @@
   .ticket h3{ font-family: 'Bebas Neue', sans-serif; font-size: 2.4rem; text-transform: uppercase; margin: 6px 0 4px; letter-spacing: 0.02em; }
   .ticket-tag{ color: var(--paper-dim); font-size: 0.92rem; margin-bottom: 14px; display: block; }
   .ticket-price{
-    display: flex; align-items: baseline; gap: 10px;
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px;
     margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px dashed var(--line);
   }
   .ticket-price b{ font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--cyan); letter-spacing: 0.02em; }
   .ticket-price span{ color: var(--paper-faint); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .ticket-price-alt{ flex-basis: 100%; margin-top: -4px; }
+  .ticket-price .ticket-price-alt b{ font-size: 1.35rem; color: var(--paper); margin-right: 6px; }
   .ticket-group{
     font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase;
     letter-spacing: 0.18em; font-size: 0.8rem; color: var(--paper-faint);
@@ -807,8 +809,8 @@
         <div class="ticket">
           <span class="ticket-eyebrow">Combo</span>
           <h3 class="display">Basic</h3>
-          <span class="ticket-tag">Fiestas y reuniones sencillas · 1 a 6 horas</span>
-          <div class="ticket-price"><b>$450.000</b><span>por evento</span></div>
+          <span class="ticket-tag">Fiestas y reuniones sencillas · 4 o 6 horas</span>
+          <div class="ticket-price"><b>$300.000</b><span>4 horas</span><span class="ticket-price-alt"><b>$450.000</b> 6 horas</span></div>
           <div class="ticket-group">Sonido</div>
           <ul>
             <li>Cabina activa de 600W (RMS)</li>

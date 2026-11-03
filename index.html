@@ -569,6 +569,8 @@
     transition: border-color 200ms ease;
   }
   .quote:hover{ border-color: var(--magenta); }
+  /* en pantallas anchas caben 3 tarjetas completas */
+  @media (min-width: 981px){ .quote{ flex-basis: calc((100% - 52px) / 3); } }
   .quote-mark{ font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--magenta); line-height: 1; display: block; margin-bottom: 8px; }
   .quote p{ color: var(--paper-dim); font-size: 1.05rem; margin: 0 0 20px; }
   .quote-author{ font-family: 'Barlow Condensed', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.95rem; color: var(--paper); }
@@ -1010,19 +1012,17 @@
       <div class="t-head reveal">
         <div>
           <span class="kicker">Confianza</span>
-          <h2 class="sec-title display" style="margin-bottom:0;">Lo que dicen quienes ya vivieron el show</h2>
+          <h2 class="sec-title display" style="margin-bottom:0;">Por qué confiar en nosotros</h2>
         </div>
         <div class="t-nav">
-          <button class="t-btn t-prev" type="button" aria-label="Ver comentario anterior">&#8249;</button>
-          <button class="t-btn t-next" type="button" aria-label="Ver comentario siguiente">&#8250;</button>
+          <button class="t-btn t-prev" type="button" aria-label="Ver anterior">&#8249;</button>
+          <button class="t-btn t-next" type="button" aria-label="Ver siguiente">&#8250;</button>
         </div>
       </div>
-      <div class="t-slider reveal" tabindex="0" aria-label="Comentarios de clientes, desliza para ver más">
-        <div class="quote"><span class="quote-mark">“</span><p>Contratamos el combo Ultra para los 30 de mi esposa y la casa terminó pareciendo discoteca. El DJ leyó súper bien al público — hasta mi suegra bailó. El arco de luces solito ya valía la pena.</p><div class="quote-author">Julián R.</div><div class="quote-role">Cumpleaños · Suba</div></div>
-        <div class="quote"><span class="quote-mark">“</span><p>Llegaron puntuales, montaron todo en una hora y el sonido se escuchó durísimo sin saturar. A los tres días nos pasaron las fotos editadas y quedaron muy bacanas.</p><div class="quote-author">Carolina M.</div><div class="quote-role">Grado · Chapinero</div></div>
-        <div class="quote"><span class="quote-mark">“</span><p>Era un evento de la empresa, algo serio, y supieron manejar el ambiente: música tranquila al inicio y ya de noche le subieron. Muy cuidadosos con el cableado y la logística.</p><div class="quote-author">Andrés T.</div><div class="quote-role">Evento corporativo · Teusaquillo</div></div>
-        <div class="quote"><span class="quote-mark">“</span><p>Les escribí un martes para una fiesta el sábado y me resolvieron de una. La cámara de humo con el láser se ve increíble en video — mis historias quedaron de otro nivel.</p><div class="quote-author">Valentina G.</div><div class="quote-role">Fiesta privada · Cedritos</div></div>
-        <div class="quote"><span class="quote-mark">“</span><p>Segunda vez que los contratamos. Lo que más valoro es que no hay que perseguirlos: confirman, llegan, montan y la fiesta sale sola. Así da gusto.</p><div class="quote-author">Diego P.</div><div class="quote-role">Cliente repetido · Engativá</div></div>
+      <div class="t-slider reveal" tabindex="0" aria-label="Razones para confiar en Meduzza, desliza para ver más">
+        <div class="quote"><span class="quote-mark">4,5 / 5</span><p>Es la calificación que nos han dado los clientes que nos contrataron por Facebook Marketplace. Pronto vas a ver aquí sus reseñas, con su nombre y su permiso.</p><div class="quote-author">Calificación real</div><div class="quote-role">Facebook Marketplace</div></div>
+        <div class="quote"><span class="quote-mark">Precio fijo</span><p>Lo que ves en cada combo es lo que pagas. El transporte va incluido en toda Bogotá y no hay cobros por sorpresa el día de la fiesta.</p><div class="quote-author">Sin sorpresas</div><div class="quote-role">Combos desde $300.000</div></div>
+        <div class="quote"><span class="quote-mark">$25.000</span><p>Con eso separas tu fecha por Bre-B. Hacemos máximo 3 fiestas por fin de semana, así que conviene separar con tiempo.</p><div class="quote-author">Separa tu fecha</div><div class="quote-role">Pago por Bre-B</div></div>
       </div>
     </div>
   </section>

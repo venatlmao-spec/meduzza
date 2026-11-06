@@ -21,23 +21,34 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@type": ["LocalBusiness", "EntertainmentBusiness"],
   "name": "Meduzza",
   "description": "Sonido, luces láser, humo y DJ para fiestas en Bogotá. Combos con precio fijo y transporte incluido.",
   "url": "https://meduzza.store/",
   "image": "https://meduzza.store/assets/icon-512.png",
-  "telephone": "+57 313 841 3374",
+  "telephone": "+573138413374",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bogotá",
     "addressCountry": "CO"
   },
-  "areaServed": {
-    "@type": "City",
-    "name": "Bogotá"
-  },
+  "areaServed": [
+    { "@type": "City", "name": "Bogotá" },
+    { "@type": "City", "name": "Chía" },
+    { "@type": "City", "name": "Cota" },
+    { "@type": "City", "name": "Soacha" },
+    { "@type": "City", "name": "Mosquera" },
+    { "@type": "City", "name": "Funza" }
+  ],
   "sameAs": ["https://www.instagram.com/meduzza.prod"],
-  "priceRange": "COP 300.000 - 1.000.000"
+  "priceRange": "COP 300.000 - 1.000.000",
+  "makesOffer": [
+    { "@type": "Offer", "name": "Combo Basic", "price": "300000", "priceCurrency": "COP", "description": "Sonido con DJ y luz audiorrítmica. 4 horas ($300.000) o 6 horas ($450.000). Transporte incluido." },
+    { "@type": "Offer", "name": "Combo Party", "price": "350000", "priceCurrency": "COP", "description": "Sonido con DJ, láser robótico, cámara de humo y micrófono. 4 horas. Transporte incluido." },
+    { "@type": "Offer", "name": "Combo VIP", "price": "550000", "priceCurrency": "COP", "description": "Sonido con DJ, láser, animador y micrófono. 1 a 6 horas. Transporte incluido." },
+    { "@type": "Offer", "name": "Combo Ultra", "price": "650000", "priceCurrency": "COP", "description": "Arco de luces 3x3, láser, humo y strober con DJ y animador. 1 a 6 horas. Transporte incluido." },
+    { "@type": "Offer", "name": "Combo Deluxe", "price": "1000000", "priceCurrency": "COP", "description": "Producción completa con arco de luces 3x3, efectos y fotografía incluida. 1 a 7 horas. Transporte incluido." }
+  ]
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -771,7 +782,7 @@
     </div>
 
     <div class="service-row tint-cyan rev reveal r-right">
-      <div class="s-media"><img src="assets/event-05.jpg" alt="Estructura de truss con láseres en un evento"></div>
+      <div class="s-media"><img src="assets/event-05.jpg" alt="Luces láser robóticas y audiorrítmicas en un evento en Bogotá"></div>
       <div class="s-text cascade">
         <span class="s-num">02</span>
         <h3 class="display">Iluminación &amp; láseres</h3>

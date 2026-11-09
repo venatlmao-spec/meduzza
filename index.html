@@ -25,8 +25,20 @@
   "name": "Meduzza",
   "description": "Sonido, luces láser, humo y DJ para fiestas en Bogotá. Combos con precio fijo y transporte incluido.",
   "url": "https://meduzza.store/",
-  "image": "https://meduzza.store/assets/icon-512.png",
+  "image": "https://meduzza.store/assets/event-02.jpg",
+  "logo": "https://meduzza.store/assets/icon-512.png",
   "telephone": "+57 313 841 3374",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Combos de sonido, luces y DJ",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Combo Basic", "description": "Sonido, DJ y luz audiorrítmica · 4 horas ($450.000 por 6 horas)", "price": "300000", "priceCurrency": "COP" },
+      { "@type": "Offer", "name": "Combo Party", "description": "Sonido, DJ, láser y humo · 4 horas", "price": "350000", "priceCurrency": "COP" },
+      { "@type": "Offer", "name": "Combo VIP", "description": "Sonido, DJ, láser, luces y maestro de ceremonias · por evento", "price": "550000", "priceCurrency": "COP" },
+      { "@type": "Offer", "name": "Combo Ultra", "description": "Sonido, DJ, arco de luces, láser, humo y estrober · por evento", "price": "650000", "priceCurrency": "COP" },
+      { "@type": "Offer", "name": "Combo Deluxe", "description": "Producción completa con fotografía incluida · por evento", "price": "1000000", "priceCurrency": "COP" }
+    ]
+  },
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Bogotá",
@@ -75,6 +87,7 @@
   ul{ list-style: none; margin: 0; padding: 0; }
 
   .display{ font-family: 'Bebas Neue', 'Barlow Condensed', sans-serif; letter-spacing: 0.01em; }
+  .sr-only{ position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .container{ max-width: 1320px; margin: 0 auto; padding: 0 28px; }
 
   /* film grain overlay — texture, not decoration */
@@ -737,7 +750,7 @@
     </div>
     <div class="container hero-main">
       <h1 class="display">
-        HACEMOS<br>
+        <span class="sr-only">Sonido, luces y DJ para fiestas en Bogotá · </span>HACEMOS<br>
         <span class="hl-magenta">RUMBA,</span> <span class="hl-cyan">SHOW</span><br>
         Y EXPERIENCIA
       </h1>
